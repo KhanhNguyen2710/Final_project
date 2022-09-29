@@ -9,14 +9,16 @@ import androidx.annotation.Nullable;
 public class Database extends SQLiteOpenHelper {
 // change name
     private Context context;
-    private static final String DATABASE_NAME = "TripLibrary.db";
+    private static final String DATABASE_NAME = "Expense.db";
     private static final int DATABASE_VERSION = 1 ;
     // create table data
-    private static final String TABLE_NAME = "trip_library" ;
+    private static final String TABLE_NAME = "trip_Expensse" ;
     private static final String COLUMN_ID = "_id" ;
-    private static final String COLUMN_TITLE = "product_title" ;
-    private static final String COLUMN_SELLER = "product_seller" ;
-    private static final String COLUMN_QUALITY = "product_quality" ;
+    private static final String COLUMN_NAME = "name" ;
+    private static final String COLUMN_DESTINATION = "DESTINATION" ;
+    private static final String COLUMN_DATE = "date" ;
+    private static final String COLUMN_RICKS = "date" ;
+    private static final String COLUMN_DESCRIPTION = "description" ;
 
     // Database == MyDatabaseHelper
     public Database(@Nullable Context context) {
@@ -28,9 +30,11 @@ public class Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME +
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_TITLE + " TEXT, " +
-                        COLUMN_SELLER + " TEXT, " +
-                        COLUMN_QUALITY + " INTEGER);";
+                        COLUMN_NAME + " TEXT, " +
+                        COLUMN_DESTINATION + " TEXT, " +
+                        COLUMN_DATE + " INTEGER, " +
+                        COLUMN_RICKS + " TEXT, " +
+                        COLUMN_DESCRIPTION + " TEXT);";
         db.execSQL(query);
     }
 
