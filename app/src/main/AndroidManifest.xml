@@ -16,8 +16,7 @@
         <activity
             android:name=".AddActivity"
             android:label="Save trip"
-            android:parentActivityName=".MainActivity"/>
-        // parentActivityName xác định action lớn sẽ mở ra và back về
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
