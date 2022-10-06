@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -14,8 +15,8 @@ public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Expense.db";
     private static final int DATABASE_VERSION = 1;
     // create table data
-    private static final String TABLE_NAME = "trip_Expensse";
-    private static final String COLUMN_ID = "_id";
+    private static final String TABLE_NAME = "trip_expensse";
+    private static final String COLUMN_ID = "trip_id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_DESTINATION = "destination";
     private static final String COLUMN_DATE = "date";
@@ -57,10 +58,21 @@ public class Database extends SQLiteOpenHelper {
         cv.put(COLUMN_RICKS, ricks);
         cv.put(COLUMN_DESCRIPTION, description);
         long result = db.insert(TABLE_NAME, null, cv);
+        // báo kết quả
         if (result == -1) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Added successfully!", Toast.LENGTH_SHORT).show();
         }
+    }
+    Cursor readAllData(){
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null ;
+        if(db !=null){
+            cursor =db.rawQuery(query, null);
+        }
+        return cursor;
     }
 }
