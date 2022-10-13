@@ -15,16 +15,16 @@ import java.util.ArrayList;
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList trip_id, name, destination, date, ricks, description;
+    private ArrayList trip_id, name, destination, date, risks, description;
 // fix
     Adapter(Context context, ArrayList trip_id, ArrayList name, ArrayList destination, ArrayList date,
-            ArrayList ricks, ArrayList description) {
+            ArrayList risks, ArrayList description) {
         this.context = context;
         this.trip_id = trip_id;
         this.name = name;
         this.destination = destination;
         this.date = date;
-        this.ricks = ricks;
+        this.risks = risks;
         this.description = description;
 
     }
@@ -44,7 +44,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         holder.name_txt.setText(String.valueOf(name.get(position)));
         holder.destination_txt.setText(String.valueOf(destination.get(position)));
         holder.date_txt.setText(String.valueOf(date.get(position)));
-        holder.ricks_txt.setText(String.valueOf(ricks.get(position)));
+        holder.risks_txt.setText(String.valueOf(risks.get(position)));
         holder.description_txt.setText(String.valueOf(description.get(position)));
     }
 
@@ -55,14 +55,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView trip_id_txt, name_txt, destination_txt, date_txt, ricks_txt, description_txt;
+        TextView trip_id_txt, name_txt, destination_txt, date_txt, risks_txt, description_txt;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             trip_id_txt = itemView.findViewById(R.id.trip_id_txt);
             name_txt = itemView.findViewById(R.id.name_txt);
             destination_txt = itemView.findViewById(R.id.destination_txt);
             date_txt = itemView.findViewById(R.id.date_txt);
-            ricks_txt = itemView.findViewById(R.id.ricks_txt);
+            risks_txt = itemView.findViewById(R.id.risks_txt);
             description_txt = itemView.findViewById(R.id.description_txt);
         }
     }

@@ -20,7 +20,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_DESTINATION = "destination";
     private static final String COLUMN_DATE = "date";
-    private static final String COLUMN_RICKS = "ricks";
+    private static final String COLUMN_RISKS = "risks";
     private static final String COLUMN_DESCRIPTION = "description";
 
     // Database == MyDatabaseHelper
@@ -37,7 +37,7 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_NAME + " TEXT, " +
                 COLUMN_DESTINATION + " TEXT, " +
                 COLUMN_DATE + " TEXT, " +
-                COLUMN_RICKS + " TEXT, " +
+                COLUMN_RISKS + " TEXT, " +
                 COLUMN_DESCRIPTION + " TEXT);";
         db.execSQL(query);
     }
@@ -48,21 +48,22 @@ public class Database extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addData(String name, String destination, String date, String ricks, String description) {
+    void addData(String name, String destination, String date, String risks, String description) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_DESTINATION, destination);
         cv.put(COLUMN_DATE, date);
-        cv.put(COLUMN_RICKS, ricks);
+        cv.put(COLUMN_RISKS, risks);
         cv.put(COLUMN_DESCRIPTION, description);
         long result = db.insert(TABLE_NAME, null, cv);
         // báo kết quả
-        if (result == -1) {
+        if (result == 0) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Added successfully!", Toast.LENGTH_SHORT).show();
+        return;
         }
     }
     Cursor readAllData(){

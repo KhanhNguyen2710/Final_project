@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton add_button;
     Database myDB;
-    ArrayList<String> trip_id, name, destination, date, ricks, description;
+    ArrayList<String> trip_id, name, destination, date, risks, description;
     Adapter adapter;
 
     @Override
@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
         name = new ArrayList<>();
         destination = new ArrayList<>();
         date = new ArrayList<>();
-        ricks = new ArrayList<>();
+        risks = new ArrayList<>();
         description = new ArrayList<>();
 
         storeData();
         adapter = new Adapter(MainActivity.this, trip_id, name, destination,
-                date, ricks, description);
+                date, risks, description);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 name.add(cursor.getString(1));
                 destination.add(cursor.getString(2));
                 date.add(cursor.getString(3));
-                ricks.add(cursor.getString(4));
+                risks.add(cursor.getString(4));
                 description.add(cursor.getString(5));
             }
         }
