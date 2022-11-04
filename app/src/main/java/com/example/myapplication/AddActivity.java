@@ -43,10 +43,12 @@ public class AddActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View view) {
+                //getInputs();
                 Database myDB = new Database(AddActivity.this);
                 int checkedID = Risks_input.getCheckedRadioButtonId();
                 radioChecked = findViewById(checkedID);
                 String textRadio = radioChecked.getText().toString().trim();
+
                 // thứ tự
                 myDB.addData(Name_input.getText().toString().trim(),
                         Destination_input.getText().toString().trim(),
@@ -54,6 +56,7 @@ public class AddActivity extends AppCompatActivity {
                         textRadio,
                         Description_input.getText().toString().trim());
 
+                // show
                 String strName = Name_input.getText().toString();
                 String strDestination = Destination_input.getText().toString();
                 String strDate = Date_input.getText().toString();
@@ -61,12 +64,15 @@ public class AddActivity extends AppCompatActivity {
                 String strDescription = Description_input.getText().toString();
 
                 displayNextAlert(strName, strDestination, strDate, strRisks, strDescription);
+                /*Intent intent = new Intent( AddActivity.this, Adapter.class);
+                startActivity(intent);*/
+                //getInputs();
             }
 
         });
-
-
     }
+
+
     public void showDatePickerDialog(View v){
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
@@ -80,19 +86,21 @@ public class AddActivity extends AppCompatActivity {
     // show entered data
 
     private void displayNextAlert(String strName, String strDestination, String strDate, String strRisks, String strDescription){
-        new AlertDialog.Builder(this).setTitle("Details entered").setMessage(/*"Details entered: " +*/
+        new AlertDialog.Builder(this).setTitle("Details entered").setMessage(
                 "\n" + "Name: " + strName +
                 "\n" + "Destination: " + strDestination +
                 "\n" + "Date: " + strDate +
                 "\n" + "Risks: " + strRisks +
                 "\n" + "Description: " + strDescription
         ).setNeutralButton("Done", new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent( AddActivity.this, Adapter.class);
+                Intent intent = new Intent( AddActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         }).show();
+
     }
 
 }

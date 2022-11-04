@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,11 +47,21 @@ public class MainActivity extends AppCompatActivity {
         description = new ArrayList<>();
 
         storeData();
-        adapter = new Adapter(MainActivity.this, trip_id, name, destination,
+
+        adapter = new Adapter(MainActivity.this,this, trip_id, name, destination,
                 date, risks, description);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+            recreate();
+        }
+    }
+
     void storeData(){
         Cursor cursor = myDB.readAllData();
         if(cursor.getCount() == 0){
