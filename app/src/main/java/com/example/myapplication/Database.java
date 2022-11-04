@@ -95,4 +95,13 @@ public class Database extends SQLiteOpenHelper {
 
         }
     }
+    void deleteData(String row_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, "trip_id=?", new String[]{row_id});
+        if (result == -1){
+            Toast.makeText(context, "Failed to Deleted.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

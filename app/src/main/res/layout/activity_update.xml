@@ -139,13 +139,26 @@
         android:layout_width="185dp"
         android:layout_height="51dp"
         android:layout_marginTop="12dp"
+        android:backgroundTint="#273DFF"
         android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAllCaps="false"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Description_input2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/Description_input2" />
+
+    <Button
+        android:id="@+id/Delete_button"
+        android:layout_width="185dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FF0000"
+        android:text="Delete"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Save_button2" />
 
     <TextView
         android:id="@+id/Date_input2"

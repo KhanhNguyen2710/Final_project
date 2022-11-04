@@ -2,23 +2,19 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.MutableLiveData;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity {
     EditText Destination_input, Name_input, Description_input;
@@ -74,7 +70,7 @@ public class AddActivity extends AppCompatActivity {
 
 
     public void showDatePickerDialog(View v){
-        DialogFragment newFragment = new DatePickerFragment();
+        DialogFragment newFragment = new DateOfAdd();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 

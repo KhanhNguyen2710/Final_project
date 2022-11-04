@@ -21,7 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-public class DatePickerFragment2 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class DateOfAdd extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState){
@@ -36,6 +36,6 @@ public class DatePickerFragment2 extends DialogFragment implements DatePickerDia
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         LocalDate dob = LocalDate.of(year, ++month, day);
-        ((Update_Activity)getActivity()).updateDOB2(dob);
+        ((AddActivity)getActivity()).updateDOB(dob);
     }
 }

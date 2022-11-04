@@ -1,8 +1,12 @@
 package com.example.myapplication;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +21,7 @@ import java.time.LocalDate;
 public class Update_Activity extends AppCompatActivity {
 
     EditText Destination_input, Name_input, Description_input;
-    Button Save_button;
+    Button Save_button, Delete_button;
     RadioGroup Risks_input;
     RadioButton radioChecked;
     TextView Date_input;
@@ -36,12 +40,17 @@ public class Update_Activity extends AppCompatActivity {
         /*int checkedID2 = Risks_input.getCheckedRadioButtonId();
         radioChecked = findViewById(checkedID2);*/
         // String radioText = radioChecked.getText().toString();
-
+        Delete_button = findViewById(R.id.Delete_button);
 
         Save_button=findViewById(R.id.Save_button2);
 
         getAndSetIntentData();
 
+        // set actionbar title after getAndSetIntentData method
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setTitle(name);
+        }
         Save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +72,12 @@ public class Update_Activity extends AppCompatActivity {
 
             }
         });
-
+        Delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmDialog();
+            }
+        });
 
 
     }
@@ -107,9 +121,30 @@ public class Update_Activity extends AppCompatActivity {
         }
     }
 
+    void confirmDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete " + name + "?" );
+        builder.setMessage("Are you sure you want to delete" + name + "?");
+        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Database myDB = new Database(Update_Activity.this);
+                myDB.deleteData(trip_id);
+                Intent intent = new Intent( Update_Activity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
+    }
 
     public void showDatePickerDialog2(View v){
-        DialogFragment newFragment = new DatePickerFragment2();
+        DialogFragment newFragment = new DateOfUpdate();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
