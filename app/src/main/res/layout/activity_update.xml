@@ -135,12 +135,12 @@
         app:layout_constraintTop_toBottomOf="@+id/Risks_input2" />
 
     <Button
-        android:id="@+id/Save_button2"
+        android:id="@+id/Update_button2"
         android:layout_width="185dp"
         android:layout_height="51dp"
         android:layout_marginTop="12dp"
         android:backgroundTint="#273DFF"
-        android:text="Save"
+        android:text="Update"
         android:textAllCaps="false"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +158,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Save_button2" />
+        app:layout_constraintTop_toBottomOf="@+id/Update_button2" />
 
     <TextView
         android:id="@+id/Date_input2"

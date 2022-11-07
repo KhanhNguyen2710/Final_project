@@ -42,7 +42,7 @@ public class Update_Activity extends AppCompatActivity {
         // String radioText = radioChecked.getText().toString();
         Delete_button = findViewById(R.id.Delete_button);
 
-        Save_button=findViewById(R.id.Save_button2);
+        Save_button=findViewById(R.id.Update_button2);
 
         getAndSetIntentData();
 
@@ -130,6 +130,7 @@ public class Update_Activity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Database myDB = new Database(Update_Activity.this);
                 myDB.deleteData(trip_id);
+                finish();
                 Intent intent = new Intent( Update_Activity.this, MainActivity.class);
                 startActivity(intent);
             }

@@ -51,7 +51,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
       //  this.position = position;
 
-        holder.trip_id_txt.setText(String.valueOf(trip_id.get(position)));
+//      holder.trip_id_txt.setText(String.valueOf(trip_id.get(position)));
+        holder.trip_id_txt.setText(String.valueOf(position + 1));
         holder.name_txt.setText(String.valueOf(name.get(position)));
         holder.destination_txt.setText(String.valueOf(destination.get(position)));
         holder.date_txt.setText(String.valueOf(date.get(position)));
