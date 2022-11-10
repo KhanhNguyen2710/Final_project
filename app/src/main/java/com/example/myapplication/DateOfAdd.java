@@ -1,25 +1,15 @@
 package com.example.myapplication;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class DateOfAdd extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     @NonNull
@@ -36,6 +26,6 @@ public class DateOfAdd extends DialogFragment implements DatePickerDialog.OnDate
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         LocalDate dob = LocalDate.of(year, ++month, day);
-        ((AddActivity)getActivity()).updateDOB(dob);
+        ((AddTrip)getActivity()).updateDOB(dob);
     }
 }

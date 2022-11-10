@@ -21,14 +21,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-import kotlinx.coroutines.internal.MainDispatcherFactory;
-
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton add_button;
     Database myDB;
     ArrayList<String> trip_id, name, destination, date, risks, description;
-    Adapter adapter;
+    TripAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddTrip.class);
                 startActivity(intent);
             }
         });
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         storeData();
 
-        adapter = new Adapter(MainActivity.this, this, trip_id, name, destination,
+        adapter = new TripAdapter(MainActivity.this, this, trip_id, name, destination,
                 date, risks, description);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -69,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void storeData() {
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = myDB.readAllDataTrip();
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         } else {

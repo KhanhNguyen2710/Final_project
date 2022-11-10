@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.time.LocalDate;
 
-public class DateOfUpdate extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class DateOfExpense extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState){
@@ -26,6 +26,6 @@ public class DateOfUpdate extends DialogFragment implements DatePickerDialog.OnD
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         LocalDate dob = LocalDate.of(year, ++month, day);
-        ((UpdateTrip)getActivity()).updateDOB2(dob);
+        ((AddExpense)getActivity()).updateDOB3(dob);
     }
 }

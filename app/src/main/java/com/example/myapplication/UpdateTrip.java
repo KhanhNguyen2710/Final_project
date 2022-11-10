@@ -18,10 +18,10 @@ import android.widget.Toast;
 
 import java.time.LocalDate;
 
-public class Update_Activity extends AppCompatActivity {
+public class UpdateTrip extends AppCompatActivity {
 
     EditText Destination_input, Name_input, Description_input;
-    Button Save_button, Delete_button;
+    Button Save_button, Delete_button, Expense_button;
     RadioGroup Risks_input;
     RadioButton radioChecked;
     TextView Date_input;
@@ -30,7 +30,7 @@ public class Update_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update);
+        setContentView(R.layout.activity_update_trip);
 
         Name_input = findViewById(R.id.Name_input2);
         Destination_input = findViewById(R.id.Destination_input2);
@@ -59,13 +59,13 @@ public class Update_Activity extends AppCompatActivity {
                 radioChecked = findViewById(checkedID2);
                 String radioText = radioChecked.getText().toString();
 
-                Database myDB = new Database(Update_Activity.this);
+                Database myDB = new Database(UpdateTrip.this);
                 name = Name_input.getText().toString().trim();
                 destination = Destination_input.getText().toString().trim();
                 date = Date_input.getText().toString().trim();
                 risks = radioText;
                 description = Description_input.getText().toString().trim();
-                myDB.updateData(trip_id, name, destination, date, risks, description);
+                myDB.updateDataTrip(trip_id, name, destination, date, risks, description);
             //risks = radioText;
 
 
@@ -79,6 +79,17 @@ public class Update_Activity extends AppCompatActivity {
             }
         });
 
+
+        // to ExpanseMain
+        Expense_button = findViewById(R.id.Expense_button);
+        Expense_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent intent = new Intent(UpdateTrip.this, MainExpense.class);
+                    startActivity(intent);
+
+            }
+        });
 
     }
     void getAndSetIntentData() {
@@ -128,10 +139,10 @@ public class Update_Activity extends AppCompatActivity {
         builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Database myDB = new Database(Update_Activity.this);
-                myDB.deleteData(trip_id);
+                Database myDB = new Database(UpdateTrip.this);
+                myDB.deleteDataTrip(trip_id);
                 finish();
-                Intent intent = new Intent( Update_Activity.this, MainActivity.class);
+                Intent intent = new Intent( UpdateTrip.this, MainActivity.class);
                 startActivity(intent);
             }
         });

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
+public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> {
 
     private Context context;
     Activity activity;
@@ -25,8 +24,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
    // int position;
 
 
-    Adapter(Activity activity, Context context, ArrayList trip_id, ArrayList name, ArrayList destination, ArrayList date,
-            ArrayList risks, ArrayList description) {
+    TripAdapter(Activity activity, Context context, ArrayList trip_id, ArrayList name, ArrayList destination, ArrayList date,
+                ArrayList risks, ArrayList description) {
         this.activity = activity;
         this.context = context;
         this.trip_id = trip_id;
@@ -43,12 +42,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override //Adapter.MyViewHolder
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row, parent, false);
+        View view = inflater.inflate(R.layout.trip_detail, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull TripAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
       //  this.position = position;
 
 //      holder.trip_id_txt.setText(String.valueOf(trip_id.get(position)));
@@ -61,7 +60,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, Update_Activity.class);
+                Intent intent = new Intent(context, UpdateTrip.class);
                 intent.putExtra("trip_id", String.valueOf(trip_id.get(position)));
                 intent.putExtra("name", String.valueOf(name.get(position)));
                 intent.putExtra("destination", String.valueOf(destination.get(position)));

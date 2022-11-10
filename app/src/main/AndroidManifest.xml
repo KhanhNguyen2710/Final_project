@@ -14,15 +14,24 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".Update_Activity"
+            android:name=".AddExpense"
+            android:label="Add Expense"
+            android:parentActivityName=".MainExpense"/>
+        <activity
+            android:name=".MainExpense"
+            android:label="Expense Detail"
+            android:parentActivityName=".AddTrip" />
+        <activity
+            android:name=".UpdateTrip"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AddActivity"
+            android:name=".AddTrip"
             android:label="Save trip"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="All Trip">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
