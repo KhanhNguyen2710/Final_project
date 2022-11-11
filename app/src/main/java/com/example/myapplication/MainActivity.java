@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton add_button;
     Database myDB;
     ArrayList<String> trip_id, name, destination, date, risks, description;
-    TripAdapter adapter;
+    TripAdapter tripAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         storeData();
 
-        adapter = new TripAdapter(MainActivity.this, this, trip_id, name, destination,
+        tripAdapter = new TripAdapter(MainActivity.this, this, trip_id, name, destination,
                 date, risks, description);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(tripAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
 

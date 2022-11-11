@@ -67,7 +67,6 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPENSE );
         onCreate(db);
     }
-    //*********************************** ADD *********************************** //
     //******** ADD TRIP **********//
     void addDataTrip(String name, String destination, String date, String risks, String description) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -113,8 +112,8 @@ public class Database extends SQLiteOpenHelper {
             return;
         }
     }
-    Cursor readAllDataExpense(int id){
-        String query = "SELECT * FROM " + TABLE_EXPENSE;
+    Cursor readAllDataExpense(int expense_trip_id){
+        String query = "SELECT * FROM " + TABLE_EXPENSE + " WHERE " + EXPENSE_ID_TRIP + " = " + expense_trip_id ;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null ;

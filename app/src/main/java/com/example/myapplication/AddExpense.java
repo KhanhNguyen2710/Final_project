@@ -21,8 +21,7 @@ public class AddExpense extends AppCompatActivity {
     Button Add_button;
     TextView Time;
     Spinner Type_status;
-    String Type;
-    int expense_trip_id;
+    int trip_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,7 @@ public class AddExpense extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Type_status.setAdapter((dataAdapter));
 
-       /* Type_status.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*Type_status.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Type = adapterView.getItemAtPosition(position).toString().trim();
@@ -46,21 +45,26 @@ public class AddExpense extends AppCompatActivity {
             }
         });
         Bundle extras = getIntent().getExtras();
-        expense_trip_id = extras.getInt("id");
+        expense_trip_id = extras.getInt("id");*/
+
         Add_button = findViewById(R.id.Add_button);
         Add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Database myDB = new Database(AddExpense.this);
                 // thứ tự
+                String TypeExpense = Type_status.getSelectedItem().toString();
 
-                myDB.addDataExpense(expense_trip_id,Type,
+                /*Bundle extras = getIntent().getExtras();
+                trip_ID = extras.getInt("expense_trip_id");*/
+
+                myDB.addDataExpense(trip_ID,TypeExpense,
                         Amount_input.getText().toString().trim(),
                         Time.getText().toString().trim());
-
             }
-        });*/
+        });
     }
+
 
     private final String[] workStatusArray = {
             "Food",
