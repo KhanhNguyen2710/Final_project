@@ -19,14 +19,13 @@ public class MainExpense extends AppCompatActivity {
     RecyclerView recyclerViewExpense;
     FloatingActionButton add_button_expense;
     Database myDB;
-    int tripID;
+    //int trip_id;
 
     ArrayList<String> expense_id;
-    ArrayList<String> expense_trip_id;
     ArrayList<String> type;
     ArrayList<String> amount;
     ArrayList<String> time;
-    ArrayList<String> expense_id_trip;
+    ArrayList<String> expense_trip_id;
     ExpenseAdapter expenseAdapter;
 
     @Override
@@ -40,31 +39,34 @@ public class MainExpense extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainExpense.this, AddExpense.class);
-                /*tripID = Integer.parseInt(getIntent().getStringExtra("expense_trip_id"));
-                intent.putExtra("expense_trip_id",tripID);*/
+                String trip_id = getIntent().getStringExtra("trip_ID");
+                intent.putExtra("trip_id", trip_id);
                 startActivity(intent);
             }
         });
         myDB = new Database(MainExpense.this);
+        expense_trip_id = new ArrayList<>();
         expense_id = new ArrayList<>();
-        // expense_id_trip = new ArrayList<>();
-
         type = new ArrayList<>();
         amount = new ArrayList<>();
         time = new ArrayList<>();
 
+
         storeDataExpense();
 
 
-        expenseAdapter = new ExpenseAdapter(MainExpense.this, this, expense_id ,  type, amount, time);
+        expenseAdapter = new ExpenseAdapter(MainExpense.this, this,expense_id,
+                type, amount, time);
         recyclerViewExpense.setAdapter(expenseAdapter);
         recyclerViewExpense.setLayoutManager(new LinearLayoutManager(MainExpense.this));
     }
 
-    void storeDataExpense() {
+    private void storeDataExpense() {
 
-       // int expense_trip_id = Integer.parseInt(getIntent().getStringExtra("expense_trip_id"));
-        Cursor cursor = myDB.readAllDataExpense(tripID);
+        // dòng này làm mất dữ liệu hiện ra màng hình những vẫn ghi vào database
+        // add vào database nhưng ko hiện ( or 1 page mới )
+        String trip_id = getIntent().getStringExtra("trip_ID");
+        Cursor cursor = myDB.readAllDataExpense(trip_id);
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         } else {
@@ -73,6 +75,7 @@ public class MainExpense extends AppCompatActivity {
                 type.add(cursor.getString(1));
                 amount.add(cursor.getString(2));
                 time.add(cursor.getString(3));
+                expense_trip_id.add(cursor.getString(4));
             }
         }
     }

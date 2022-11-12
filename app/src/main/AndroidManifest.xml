@@ -20,7 +20,7 @@
         <activity
             android:name=".MainExpense"
             android:label="Expense Detail"
-            android:parentActivityName=".AddTrip" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".UpdateTrip"
             android:parentActivityName=".MainActivity" />

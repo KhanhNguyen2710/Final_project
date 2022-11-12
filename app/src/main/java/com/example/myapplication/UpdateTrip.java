@@ -86,6 +86,7 @@ public class UpdateTrip extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     Intent intent = new Intent(UpdateTrip.this, MainExpense.class);
+                    intent.putExtra("trip_ID",trip_id);
                     startActivity(intent);
 
             }

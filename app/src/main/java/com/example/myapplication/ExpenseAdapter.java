@@ -19,16 +19,19 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.MyViewHo
 
     private Context context;
     Activity activity ;
-    private ArrayList expense_id, type, amount, time;
+    private ArrayList expense_id, type, amount, time, expense_trip_id ;
 
     ExpenseAdapter(Activity activity, Context context, ArrayList expense_id, ArrayList type, ArrayList amount,
                    ArrayList time) {
+
+
         this.activity=activity;
         this.context = context;
         this.expense_id = expense_id;
         this.type = type;
         this.amount = amount;
         this.time = time;
+
 
     }
     
@@ -65,7 +68,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView AmountExpense_txt, TypeExpense_txt, TimeExpense_txt;
-        LinearLayout mainLayoutExpense;
+       // LinearLayout mainLayoutExpense;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             AmountExpense_txt = itemView.findViewById(R.id.AmountExpense_txt);

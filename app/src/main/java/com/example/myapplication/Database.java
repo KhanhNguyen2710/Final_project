@@ -56,8 +56,9 @@ public class Database extends SQLiteOpenHelper {
                 EXPENSE_TYPE + " TEXT, " +
                 EXPENSE_AMOUNT + " TEXT, " +
                 EXPENSE_TIME + " TEXT, " +
-                EXPENSE_ID_TRIP + " INTERGER NOT NULL, " + " FOREIGN KEY (" + EXPENSE_ID_TRIP + ") REFERENCES "
-                + TABLE_TRIP + "( " + EXPENSE_ID + " ))";
+                EXPENSE_ID_TRIP + " INTEGER,  " +
+                " FOREIGN KEY (" + EXPENSE_ID_TRIP + ") REFERENCES "
+                + TABLE_TRIP + "( " + COLUMN_ID + " ))";
         db.execSQL(queryTableExpense);
     }
 
@@ -69,7 +70,7 @@ public class Database extends SQLiteOpenHelper {
     }
     //******** ADD TRIP **********//
     void addDataTrip(String name, String destination, String date, String risks, String description) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_DESTINATION, destination);
@@ -96,8 +97,8 @@ public class Database extends SQLiteOpenHelper {
         return cursor;
     }
     //******** ADD EXPENSE **********//
-    void addDataExpense(int expense_trip_id, String type, String amount, String time) {
-        SQLiteDatabase db = this.getReadableDatabase();
+    void addDataExpense(String expense_trip_id, String type, String amount, String time) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(EXPENSE_ID_TRIP, expense_trip_id);
         cv.put(EXPENSE_TYPE, type);
@@ -105,15 +106,15 @@ public class Database extends SQLiteOpenHelper {
         cv.put(EXPENSE_TIME, time);
         long result = db.insert(TABLE_EXPENSE, null, cv);
         // báo kết quả
-        if (result == 0) {
+        if (result == -1) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Added successfully!", Toast.LENGTH_SHORT).show();
             return;
         }
     }
-    Cursor readAllDataExpense(int expense_trip_id){
-        String query = "SELECT * FROM " + TABLE_EXPENSE + " WHERE " + EXPENSE_ID_TRIP + " = " + expense_trip_id ;
+    Cursor readAllDataExpense(String trip_Id){
+        String query = "SELECT * FROM " + TABLE_EXPENSE + " WHERE " + EXPENSE_ID_TRIP + " = " + trip_Id ;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null ;

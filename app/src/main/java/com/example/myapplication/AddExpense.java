@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,7 +22,6 @@ public class AddExpense extends AppCompatActivity {
     Button Add_button;
     TextView Time;
     Spinner Type_status;
-    int trip_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class AddExpense extends AppCompatActivity {
         });
         Bundle extras = getIntent().getExtras();
         expense_trip_id = extras.getInt("id");*/
-
+        String trip_Id = getIntent().getStringExtra("trip_id");
         Add_button = findViewById(R.id.Add_button);
         Add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,14 +55,21 @@ public class AddExpense extends AppCompatActivity {
                 // thứ tự
                 String TypeExpense = Type_status.getSelectedItem().toString();
 
-                /*Bundle extras = getIntent().getExtras();
-                trip_ID = extras.getInt("expense_trip_id");*/
+                // dòng này vào bị ko hiện data nhưng nó show đc dữ liệu có trong database
+                // hiện ko add vào database
 
-                myDB.addDataExpense(trip_ID,TypeExpense,
+
+                myDB.addDataExpense(trip_Id,TypeExpense,
                         Amount_input.getText().toString().trim(),
                         Time.getText().toString().trim());
+
+                Intent intent = new Intent(AddExpense.this, MainExpense.class);
+                intent.putExtra("trip_Id",trip_Id);
+                startActivity(intent);
             }
+
         });
+
     }
 
 
