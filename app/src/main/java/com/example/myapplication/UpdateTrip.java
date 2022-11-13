@@ -142,6 +142,7 @@ public class UpdateTrip extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Database myDB = new Database(UpdateTrip.this);
                 myDB.deleteDataTrip(trip_id);
+                myDB.expenseIdDelete(trip_id);
                 finish();
                 Intent intent = new Intent( UpdateTrip.this, MainActivity.class);
                 startActivity(intent);

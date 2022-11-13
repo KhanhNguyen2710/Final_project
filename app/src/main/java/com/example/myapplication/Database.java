@@ -99,7 +99,7 @@ public class Database extends SQLiteOpenHelper {
     } else {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = null;
-            String query = "SELECT * FROM "+TABLE_TRIP+" WHERE "+ COLUMN_NAME +" LIKE '%"+Search+"%'" ;
+            String query = "SELECT * FROM "+TABLE_TRIP+" WHERE "+ COLUMN_NAME +" LIKE '%"+ Search+ "%'" ;
             cursor = db.rawQuery(query,null);
             return cursor;
         }}
@@ -161,6 +161,13 @@ public class Database extends SQLiteOpenHelper {
             Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    void expenseIdDelete(String id ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_EXPENSE +  " WHERE  expense_trip_id " + " = " + id);
+    }
+
     void deleteAll(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_TRIP);

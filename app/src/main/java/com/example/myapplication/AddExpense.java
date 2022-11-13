@@ -51,21 +51,35 @@ public class AddExpense extends AppCompatActivity {
         Add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Database myDB = new Database(AddExpense.this);
-                // thứ tự
-                String TypeExpense = Type_status.getSelectedItem().toString();
+                if (checkExpense()) {
+                    Database myDB = new Database(AddExpense.this);
+                    // thứ tự
+                    String TypeExpense = Type_status.getSelectedItem().toString();
 
-                // dòng này vào bị ko hiện data nhưng nó show đc dữ liệu có trong database
-                // hiện ko add vào database
+                    // dòng này vào bị ko hiện data nhưng nó show đc dữ liệu có trong database
+                    // hiện ko add vào database
 
 
-                myDB.addDataExpense(trip_Id,TypeExpense,
-                        Amount_input.getText().toString().trim(),
-                        Time.getText().toString().trim());
+                    myDB.addDataExpense(trip_Id, TypeExpense,
+                            Amount_input.getText().toString().trim(),
+                            Time.getText().toString().trim());
 
-                Intent intent = new Intent(AddExpense.this, MainExpense.class);
-                intent.putExtra("trip_Id",trip_Id);
-                startActivity(intent);
+                    Intent intent = new Intent(AddExpense.this, MainExpense.class);
+                    intent.putExtra("trip_ID", trip_Id);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(AddExpense.this, "Please enter enough information", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            private boolean checkExpense() {
+                if (Amount_input.getText().toString().length() == 0) {
+                    return false;
+                }
+                if (Time.getText().toString().length() == 0) {
+                    return false;
+                }
+                return true;
             }
 
         });

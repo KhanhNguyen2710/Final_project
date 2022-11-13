@@ -42,7 +42,7 @@ public class AddTrip extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //getInputs();
-                if (check()) {
+                if (checkTrip()) {
                     Database myDB = new Database(AddTrip.this);
                     int checkedID = Risks_input.getCheckedRadioButtonId();
                     radioChecked = findViewById(checkedID);
@@ -70,7 +70,7 @@ public class AddTrip extends AppCompatActivity {
         });
     }
 
-    private boolean check() {
+    private boolean checkTrip() {
         if (Name_input.getText().toString().length() == 0) {
             return false;
         }
