@@ -65,7 +65,7 @@ public class MainExpense extends AppCompatActivity {
 
         // dòng này làm mất dữ liệu hiện ra màng hình những vẫn ghi vào database
         // add vào database nhưng ko hiện ( or 1 page mới )
-        String trip_id = getIntent().getStringExtra("trip_ID");
+        String trip_id = getIntent().getStringExtra("trip_ID"); //
         Cursor cursor = myDB.readAllDataExpense(trip_id);
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();

@@ -76,7 +76,8 @@ public class AddExpense extends AppCompatActivity {
     private final String[] workStatusArray = {
             "Food",
             "Travel",
-            "Transport"
+            "Transport",
+            "Other"
     };
     public void showDatePickerDialog3(View v) {
         DialogFragment newFragment = new DateOfExpense();

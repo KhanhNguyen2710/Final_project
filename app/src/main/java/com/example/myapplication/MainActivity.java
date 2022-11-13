@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     Database myDB;
     ArrayList<String> trip_id, name, destination, date, risks, description;
     TripAdapter tripAdapter;
+    EditText Search_input;
+    Button search_button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Search_input = findViewById(R.id.Search_input);
+        search_button = findViewById(R.id.search_button);
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Search = Search_input.getText().toString();
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                intent.putExtra("Search", Search);
+                startActivity(intent);
+
+            }
+        });
+
+
         myDB = new Database(MainActivity.this);
         trip_id = new ArrayList<>();
         name = new ArrayList<>();
@@ -50,7 +69,15 @@ public class MainActivity extends AppCompatActivity {
         risks = new ArrayList<>();
         description = new ArrayList<>();
 
-        storeData();
+        Search_input.setText(getIntent().getStringExtra("Search"));
+        if (Search_input.length() == 0) {
+            String Search = Search_input.getText().toString();
+            storeData(Search);
+        } else if (Search_input.length() > 0) {
+            String searchItem = Search_input.getText().toString();
+            storeData(searchItem);
+        }
+
 
         tripAdapter = new TripAdapter(MainActivity.this, this, trip_id, name, destination,
                 date, risks, description);
@@ -66,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void storeData() {
-        Cursor cursor = myDB.readAllDataTrip();
+    void storeData(String Search) {
+        Cursor cursor = myDB.readAllDataTrip(Search);
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         } else {
@@ -91,22 +118,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.delete_all){
+        if (item.getItemId() == R.id.delete_all) {
             Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
             confirmDialog();
         }
         return super.onOptionsItemSelected(item);
     }
-    void confirmDialog(){
+
+    void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete All?" );
+        builder.setTitle("Delete All?");
         builder.setMessage("Are you sure you want to delete all data?");
         builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Database myDB = new Database(MainActivity.this);
                 myDB.deleteAll();
-                Intent intent = new Intent( MainActivity.this, MainActivity.class);
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

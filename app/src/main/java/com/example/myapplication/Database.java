@@ -86,7 +86,8 @@ public class Database extends SQLiteOpenHelper {
         return;
         }
     }
-    Cursor readAllDataTrip(){
+    Cursor readAllDataTrip(String Search){
+        if(Search.length()==0){
         String query = "SELECT * FROM " + TABLE_TRIP;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -95,7 +96,13 @@ public class Database extends SQLiteOpenHelper {
             cursor =db.rawQuery(query, null);
         }
         return cursor;
-    }
+    } else {
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = null;
+            String query = "SELECT * FROM "+TABLE_TRIP+" WHERE "+ COLUMN_NAME +" LIKE '%"+Search+"%'" ;
+            cursor = db.rawQuery(query,null);
+            return cursor;
+        }}
     //******** ADD EXPENSE **********//
     void addDataExpense(String expense_trip_id, String type, String amount, String time) {
         SQLiteDatabase db = this.getWritableDatabase();
